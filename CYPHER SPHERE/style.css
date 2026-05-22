@@ -1,0 +1,137 @@
+:root {
+    --bg-dark: #07060D; /* Very dark background */
+    --primary-neon: #9333ea; /* Deep Purple/Violet for main action */
+    --secondary-neon: #10b981; /* Neon Green for accents/success */
+    --text-light: #E0E7FF; /* Light blueish-white text */
+    --matrix-color: #10b981; /* Neon green for matrix text */
+}
+
+/* Base styles: Deep dark background, default font */
+body {
+    font-family: 'Inter', Tahoma, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* NEW: Apply Roboto Mono to technical areas */
+.font-mono, #output-text, #key-input, #rsa-public-key, #rsa-private-key {
+    font-family: 'Roboto Mono', monospace; 
+}
+
+
+/* 1. Matrix Background Canvas Styling */
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    opacity: 0.2; 
+    pointer-events: none; 
+}
+
+
+/* 2. Neon Glow Effect */
+.shadow-neon-glow {
+    box-shadow: 
+        0 0 5px rgba(147, 51, 234, 0.6), 
+        0 0 15px rgba(147, 51, 234, 0.4); 
+}
+.shadow-neon-glow-hover {
+    transition: all 0.3s ease;
+}
+.shadow-neon-glow-hover:hover {
+    box-shadow: 
+        0 0 8px rgba(16, 185, 129, 0.8), 
+        0 0 20px rgba(16, 185, 129, 0.5); 
+    transform: translateY(-2px);
+}
+
+/* 3. Output Console Style */
+.output-console-style {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); 
+}
+.output-console-style pre {
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+/* --- NEW: Focus and Pulsing Animations --- */
+
+/* Input/Textarea focus color (Input Focus Flash) */
+.input-focus-neon:focus {
+    --tw-ring-color: var(--secondary-neon);
+    --tw-border-color: var(--secondary-neon);
+    outline: none;
+    animation: focus-flash 0.5s ease-in-out forwards; /* NEW */
+}
+
+@keyframes focus-flash {
+    0% { box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.8); }
+    50% { box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.5); }
+    100% { box-shadow: 0 0 0 2px var(--secondary-neon); }
+}
+
+/* NEW: Pulsing Neon Effect for the Submit Button */
+@keyframes neon-pulse {
+    0% { box-shadow: 0 0 10px var(--secondary-neon), 0 0 20px rgba(16, 185, 129, 0.4); }
+    50% { box-shadow: 0 0 15px var(--secondary-neon), 0 0 30px rgba(16, 185, 129, 0.6); }
+    100% { box-shadow: 0 0 10px var(--secondary-neon), 0 0 20px rgba(16, 185, 129, 0.4); }
+}
+
+#submit-btn {
+    animation: neon-pulse 2s infinite alternate; /* Applied here */
+}
+
+/* NEW: Glitch effect for error messages */
+.error-glitch-text {
+    color: #FF0000; /* Red */
+    text-shadow: 
+        2px 0 0 #00FFFF, 
+        -2px 0 0 #FF00FF;
+    animation: glitch-anim 0.5s infinite alternate;
+}
+
+@keyframes glitch-anim {
+    0% { transform: translate(0); opacity: 1; }
+    20% { transform: translate(-2px, 2px); opacity: 0.9; }
+    40% { transform: translate(2px, -2px); opacity: 1; }
+    60% { transform: translate(1px, 1px); opacity: 0.95; }
+    80% { transform: translate(-1px, -1px); opacity: 1; }
+    100% { transform: translate(0); opacity: 1; }
+}
+
+
+/* Custom scrollbar matching the dark theme */
+body::-webkit-scrollbar {
+    width: 8px;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: var(--primary-neon);
+    border-radius: 4px;
+}
+body::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+/* General transitions */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* Loading spinner animation */
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top: 4px solid var(--secondary-neon);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
