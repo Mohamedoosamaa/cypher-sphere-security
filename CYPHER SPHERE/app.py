@@ -295,13 +295,13 @@ CORS(app) # Enable CORS for frontend
 @app.route('/')
 def serve_index():
     """Serve the main HTML file (New.html)."""
-    return send_from_directory('.', 'New.html')
+    return send_from_directory('.', 'index.html')
 
 @app.route('/<path:path>')
 def serve_static(path):
     """Serve static files like Script.js and style.css."""
     # Simple security check to prevent source code leakage
-    if path in ['Back.py', 'New.html']:
+    if path in ['app.py', 'index.html']:
         return "Access Denied", 403
     return send_from_directory('.', path)
 
